@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 export const ingredientPropType = PropTypes.shape({
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
 });
 
