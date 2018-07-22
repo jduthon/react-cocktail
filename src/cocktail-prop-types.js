@@ -1,16 +1,21 @@
 import PropTypes from 'prop-types';
 
-export const ingredientPropType = PropTypes.shape({
+const ingredientPropType = PropTypes.shape({
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+});
+
+export const cocktailIngredientPropType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
+  ingredient: ingredientPropType.isRequired,
 });
 
 export const cocktailPropType = PropTypes.shape({
-  abv: PropTypes.number.isRequired,
+  abv: PropTypes.number,
   description: PropTypes.string,
   id: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(ingredientPropType),
+  ingredients: PropTypes.arrayOf(cocktailIngredientPropType),
   favourited: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   missingNumber: PropTypes.number.isRequired,

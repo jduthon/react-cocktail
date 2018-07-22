@@ -36,7 +36,7 @@ const Item = ({ cocktail }) => {
                 clMeasurement={ingredient.quantity}
               />{' '}
               <span className="cocktail-item__ingredient__name">
-                {ingredient.name.toLowerCase()}
+                {ingredient.ingredient.name.toLowerCase()}
               </span>
             </li>
           ))}

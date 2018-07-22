@@ -6,8 +6,7 @@ import CocktailsList from './List';
 
 const cocktailsQuery = gql`
   {
-    cocktails {
-      abv
+    allCocktails {
       id
       favourited
       name
@@ -17,7 +16,10 @@ const cocktailsQuery = gql`
       missingNumber
       ingredients {
         id
-        name
+        ingredient {
+          id
+          name
+        }
         quantity
       }
     }
@@ -26,13 +28,13 @@ const cocktailsQuery = gql`
 
 const CocktailsQuery = () => (
   <Query query={cocktailsQuery}>
-    {({ loading, error, data: { cocktails } = {} }) => {
+    {({ loading, error, data: { allCocktails } = {} }) => {
       console.log(error);
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
-      console.log(cocktails);
+      console.log(allCocktails);
 
-      return <CocktailsList cocktails={cocktails} />;
+      return <CocktailsList cocktails={allCocktails} />;
     }}
   </Query>
 );
