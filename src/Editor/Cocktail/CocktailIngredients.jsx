@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, FieldArray } from 'formik';
 
-import { makeWithIndirection } from '../utils';
+import { makeWithIndirection, getInitialValues } from '../utils';
 
 import Inputs from '../Inputs';
 import IngredientPicker from '../IngredientPicker';
@@ -18,13 +18,7 @@ const cocktailIngredientFieldsDefinition = {
   },
 };
 
-const CocktailIngredients = ({
-  name,
-  onChange,
-  onBlur,
-  value,
-  placeholder,
-}) => {
+const CocktailIngredients = ({ name, value, placeholder, ...props }) => {
   const makeWithIndexIndirection = makeWithIndirection(name);
   return (
     <FieldArray name={name}>
@@ -35,13 +29,21 @@ const CocktailIngredients = ({
               value.length > 0 &&
               value.map((cocktailIngredient, index) => {
                 const withIndirection = makeWithIndexIndirection(index);
+                const inputDef = withIndirection(
+                  cocktailIngredientFieldsDefinition
+                );
+                console.log(inputDef, value);
                 return (
                   <React.Fragment key={index}>
                     <Inputs
-                      formikProps={props}
-                      inputDef={withIndirection(
-                        cocktailIngredientFieldsDefinition
-                      )}
+                      formikProps={{
+                        ...props,
+                        values: {
+                          ...getInitialValues(inputDef),
+                          ...(value || {}),
+                        },
+                      }}
+                      inputDef={inputDef}
                       extraProps={withIndirection({
                         id: { ingredients: allIngredients },
                       })}

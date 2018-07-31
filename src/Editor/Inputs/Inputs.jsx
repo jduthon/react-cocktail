@@ -8,6 +8,7 @@ const Inputs = ({
   extraProps = {},
 }) =>
   Object.keys(values).map(key => {
+    console.log(values, key, inputDef);
     const {
       component = 'input',
       type,
